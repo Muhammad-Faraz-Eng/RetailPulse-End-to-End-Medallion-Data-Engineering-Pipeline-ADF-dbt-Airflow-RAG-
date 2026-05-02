@@ -1,0 +1,27 @@
+{
+  "project": "retailpulse",
+  "adls": {
+    "container": "landing",
+    "base_path": "proj1_retail"
+  },
+  "sources": [
+    {
+      "source_name": "sales_sql",
+      "type": "mssql",
+      "query": "SELECT * FROM dbt.sales_raw",
+      "sink_folder": "sales"
+    },
+    {
+      "source_name": "products_api",
+      "type": "rest",
+      "url": "https://fakestoreapi.com/products",
+      "sink_folder": "products"
+    },
+    {
+      "source_name": "currency_api",
+      "type": "rest",
+      "url": "https://open.er-api.com/v6/latest/PKR",
+      "sink_folder": "currency"
+    }
+  ]
+}
