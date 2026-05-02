@@ -14,13 +14,15 @@
     {
       "source_name": "products_api",
       "type": "rest",
-      "url": "https://fakestoreapi.com/products",
+      "url": "https://fakestoreapi.com/",
+      "relative_path": "products",
       "sink_folder": "products"
     },
     {
       "source_name": "currency_api",
       "type": "rest",
-      "url": "https://open.er-api.com/v6/latest/PKR",
+      "url": "https://open.er-api.com/v6/",
+      "relative_path": "latest/PKR",
       "sink_folder": "currency"
     }
   ]
