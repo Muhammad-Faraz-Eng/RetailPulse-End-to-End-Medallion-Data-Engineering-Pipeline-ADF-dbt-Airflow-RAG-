@@ -1,0 +1,27 @@
+project: retailpulse
+
+adls:
+  container: landing
+  base_path: proj1_retail
+
+sources:
+
+  sales_sql:
+    type: mssql
+    table: dbt.sales_raw
+    query: "SELECT * FROM dbt.sales_raw"
+
+  products_api:
+    type: rest
+    method: GET
+    url: https://fakestoreapi.com/products
+
+  currency_api:
+    type: rest
+    method: GET
+    url: https://open.er-api.com/v6/latest/PKR
+
+sink:
+  format: json
+  compression: none
+  partition_by: ingestion_date

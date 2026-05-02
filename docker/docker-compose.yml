@@ -1,0 +1,28 @@
+services:
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: retailpulse
+    ports:
+      - "5432:5432"
+
+  airflow:
+    image: apache/airflow:2.9.0
+    depends_on:
+      - postgres
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:admin@postgres/retailpulse
+    volumes:
+      - ../airflow/dags:/opt/airflow/dags
+    ports:
+      - "8080:8080"
+    command: standalone
+
+  ollama:
+    image: ollama/ollama:rocm
+    ports:
+      - "11434:11434"
