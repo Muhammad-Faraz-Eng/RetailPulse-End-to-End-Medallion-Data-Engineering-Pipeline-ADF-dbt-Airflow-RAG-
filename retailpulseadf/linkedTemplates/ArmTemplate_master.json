@@ -1,0 +1,153 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "retailpulseadf"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"adls_ls_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls_ls'"
+		},
+		"ls_adls_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_adls'"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().uri}"
+		},
+		"HttpServer2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().uri}"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "Faraz-Mayo"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "retail_onprem"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "retail_user"
+		},
+		"adls_ls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://retailpulsefaraz.dfs.core.windows.net/"
+		},
+		"currency_ls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().currency_url}"
+		},
+		"currency_lss_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().base_url_currency}"
+		},
+		"git_ls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/Muhammad-Faraz-Eng/RetailPulse-End-to-End-Medallion-Data-Engineering-Pipeline-ADF-dbt-Airflow-RAG-/refs/heads/main/configs/pipeline.json"
+		},
+		"ls_adls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://retailpulsefaraz.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "retailpulseadf_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"adls_ls_accountKey": {
+						"value": "[parameters('adls_ls_accountKey')]"
+					},
+					"ls_adls_accountKey": {
+						"value": "[parameters('ls_adls_accountKey')]"
+					},
+					"HttpServer1_properties_typeProperties_url": {
+						"value": "[parameters('HttpServer1_properties_typeProperties_url')]"
+					},
+					"HttpServer2_properties_typeProperties_url": {
+						"value": "[parameters('HttpServer2_properties_typeProperties_url')]"
+					},
+					"adls_ls_properties_typeProperties_url": {
+						"value": "[parameters('adls_ls_properties_typeProperties_url')]"
+					},
+					"currency_ls_properties_typeProperties_url": {
+						"value": "[parameters('currency_ls_properties_typeProperties_url')]"
+					},
+					"currency_lss_properties_typeProperties_url": {
+						"value": "[parameters('currency_lss_properties_typeProperties_url')]"
+					},
+					"git_ls_properties_typeProperties_url": {
+						"value": "[parameters('git_ls_properties_typeProperties_url')]"
+					},
+					"ls_adls_properties_typeProperties_url": {
+						"value": "[parameters('ls_adls_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "retailpulseadf_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"SqlServer1_password": {
+						"value": "[parameters('SqlServer1_password')]"
+					},
+					"SqlServer1_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
+					},
+					"SqlServer1_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_database')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'retailpulseadf_ArmTemplate_0')]"
+			]
+		}
+	]
+}

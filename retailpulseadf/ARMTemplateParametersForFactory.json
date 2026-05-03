@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "retailpulseadf"
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"adls_ls_accountKey": {
+			"value": ""
+		},
+		"ls_adls_accountKey": {
+			"value": ""
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"value": "@{linkedService().uri}"
+		},
+		"HttpServer2_properties_typeProperties_url": {
+			"value": "@{linkedService().uri}"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"value": "Faraz-Mayo"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"value": "retail_onprem"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "retail_user"
+		},
+		"adls_ls_properties_typeProperties_url": {
+			"value": "https://retailpulsefaraz.dfs.core.windows.net/"
+		},
+		"currency_ls_properties_typeProperties_url": {
+			"value": "@{linkedService().currency_url}"
+		},
+		"currency_lss_properties_typeProperties_url": {
+			"value": "@{linkedService().base_url_currency}"
+		},
+		"git_ls_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/Muhammad-Faraz-Eng/RetailPulse-End-to-End-Medallion-Data-Engineering-Pipeline-ADF-dbt-Airflow-RAG-/refs/heads/main/configs/pipeline.json"
+		},
+		"ls_adls_properties_typeProperties_url": {
+			"value": "https://retailpulsefaraz.dfs.core.windows.net/"
+		}
+	}
+}
