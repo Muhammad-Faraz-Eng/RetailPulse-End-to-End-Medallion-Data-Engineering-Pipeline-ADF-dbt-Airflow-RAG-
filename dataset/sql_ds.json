@@ -1,0 +1,17 @@
+{
+	"name": "sql_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "sales_raw"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

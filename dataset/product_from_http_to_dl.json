@@ -1,0 +1,36 @@
+{
+	"name": "product_from_http_to_dl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HttpServer1",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"uri": {
+					"value": "@dataset().uri_p",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"uri_p": {
+				"type": "string"
+			},
+			"relative_p": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().relative_p",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

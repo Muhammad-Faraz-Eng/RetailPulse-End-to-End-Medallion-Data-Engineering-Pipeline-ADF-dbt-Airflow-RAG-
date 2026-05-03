@@ -1,0 +1,21 @@
+{
+	"name": "SqlServer1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "Faraz-Mayo",
+			"database": "retail_onprem",
+			"encrypt": "optional",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "retail_user",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIzNTI1OTI5YS0wYjgwLTQxNDktYjUyNy1iYTZlNjgzNTczZjkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "onprem-retailpulse",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

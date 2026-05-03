@@ -1,0 +1,37 @@
+{
+	"name": "currency_json_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "currency_lss",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"base_url_currency": {
+					"value": "@dataset().url_currency",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"url_currency": {
+				"type": "string"
+			},
+			"relative_url": {
+				"type": "string",
+				"defaultValue": "latest/PKR"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().relative_url",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

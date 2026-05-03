@@ -1,0 +1,15 @@
+{
+	"name": "retailpulseadf",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f8312ee4-08b1-4d25-b2ff-0f48ab823164",
+		"tenantId": "fbf5cc83-111b-4a7a-8236-2614922d0745"
+	}
+}

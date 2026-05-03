@@ -1,0 +1,36 @@
+{
+	"name": "http_Currency_to_dl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HttpServer2",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"uri": {
+					"value": "@dataset().url_c",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"url_c": {
+				"type": "string"
+			},
+			"relative_c": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().relative_c",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

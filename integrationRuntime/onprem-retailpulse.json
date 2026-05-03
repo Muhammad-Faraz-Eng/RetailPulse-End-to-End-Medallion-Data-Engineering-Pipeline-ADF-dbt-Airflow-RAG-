@@ -1,0 +1,6 @@
+{
+	"name": "onprem-retailpulse",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
