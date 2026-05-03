@@ -8,7 +8,7 @@
     {
       "source_name": "sales_sql",
       "type": "mssql",
-      "query": "SELECT * FROM dbt.sales_raw",
+      "query": "SELECT * FROM dbo.sales_raw",
       "sink_folder": "sales"
     },
     {
