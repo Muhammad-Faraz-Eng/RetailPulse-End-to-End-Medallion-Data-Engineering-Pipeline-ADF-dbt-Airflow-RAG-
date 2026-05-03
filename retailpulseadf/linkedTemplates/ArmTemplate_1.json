@@ -204,7 +204,7 @@
 																		"type": "Expression"
 																	},
 																	"folder": {
-																		"value": "@concat(activity('Lookup1').output.firstRow.adls.base_path, '/', item().sink_folder)",
+																		"value": "@item().sink_folder",
 																		"type": "Expression"
 																	},
 																	"file": {
@@ -280,7 +280,7 @@
 																		"type": "Expression"
 																	},
 																	"folder": {
-																		"value": "@concat(activity('Lookup1').output.firstRow.adls.base_path, '/', item().sink_folder)",
+																		"value": "@item().sink_folder",
 																		"type": "Expression"
 																	},
 																	"file": {
@@ -356,7 +356,7 @@
 																		"type": "Expression"
 																	},
 																	"folder": {
-																		"value": "@concat(activity('Lookup1').output.firstRow.adls.base_path, '/', item().sink_folder)",
+																		"value": "@item().sink_folder",
 																		"type": "Expression"
 																	},
 																	"file": {
