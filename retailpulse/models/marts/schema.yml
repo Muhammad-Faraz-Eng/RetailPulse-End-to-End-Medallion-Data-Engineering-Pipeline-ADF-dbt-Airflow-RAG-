@@ -1,0 +1,14 @@
+models:
+  - name: dim_product
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+
+  - name: fact_sales
+    columns:
+      - name: sale_id
+        tests:
+          - not_null
+          - unique

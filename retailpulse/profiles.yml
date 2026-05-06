@@ -1,0 +1,15 @@
+retailpulse:
+  outputs:
+    dev:
+      type: sqlserver
+      driver: "ODBC Driver 17 for SQL Server"
+      server: pulseretail.database.windows.net
+      port: 1433
+      database: retailpulse
+      schema: dbo
+      user: farazmayo
+      password: Faraz@12
+      encrypt: true
+      trust_cert: false
+      threads: 1
+  target: dev

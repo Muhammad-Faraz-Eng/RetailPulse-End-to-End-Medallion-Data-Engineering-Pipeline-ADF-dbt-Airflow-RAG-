@@ -1,28 +1,54 @@
 services:
-
   postgres:
     image: postgres:15
+    container_name: retailpulse_postgres
+    restart: always
+    env_file:
+      - ./.env
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: retailpulse
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "5432:5432"
+      - "55432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   airflow:
     image: apache/airflow:2.9.0
+    container_name: retailpulse_airflow
+    env_file:
+      - ./.env
+    restart: always
     depends_on:
       - postgres
     environment:
-      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:admin@postgres/retailpulse
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
     volumes:
       - ../airflow/dags:/opt/airflow/dags
+      - ../airflow/logs:/opt/airflow/logs
+      - ../airflow/plugins:/opt/airflow/plugins
     ports:
       - "8080:8080"
-    command: standalone
+    command: >
+      bash -lc "airflow db upgrade || airflow db init; \ airflow users create
+      --username Admin --firstname admin --lastname admin --role Admin --email
+      admin@airflow.com --password admin || true; \ airflow scheduler & exec
+      airflow webserver"
 
   ollama:
     image: ollama/ollama:rocm
+    container_name: retailpulse_ollama
     ports:
       - "11434:11434"
+
+  metabase:
+    image: metabase/metabase
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:

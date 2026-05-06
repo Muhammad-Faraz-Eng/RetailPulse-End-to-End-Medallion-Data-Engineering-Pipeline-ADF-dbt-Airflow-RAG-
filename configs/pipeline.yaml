@@ -1,0 +1,72 @@
+project: retailpulse
+
+storage:
+  container_landing: landing
+  container_bronze: bronze
+  container_silver: silver
+  container_gold: gold
+
+bronze:
+
+  sales:
+    path: landing/sales/
+    format: csv
+    required_columns:
+      - order_id
+      - store_id
+      - product_id
+      - qty
+      - price
+      - date
+    dtypes:
+      order_id: str
+      store_id: int
+      product_id: int
+      qty: int
+      price: float
+      date: datetime
+
+  products:
+    path: landing/products/
+    format: json
+    required_columns:
+      - id
+      - title
+      - price
+      - category
+    dtypes:
+      id: int
+      title: str
+      price: float
+      category: str
+
+  currency:
+    path: landing/currency/
+    format: json
+    required_columns:
+      - base_code
+      - currency_code
+      - rate
+    dtypes:
+      base_code: str
+      currency_code: str
+      rate: float
+silver:
+
+  sales:
+    source: sales
+    bronze_path: sales/
+    target_table: silver_sales
+    transformer: transform_sales
+
+  products:
+    source: products
+    bronze_path: products/
+    target_table: silver_products
+    transformer: transform_products
+
+  currency:
+    source: currency
+    bronze_path: currency/
+    target_table: silver_currency
+    transformer: transform_currency
